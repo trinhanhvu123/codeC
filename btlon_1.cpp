@@ -16,6 +16,12 @@ struct giohang_st {
     sp_st dssp[31];
 };
 
+void taogiohang(giohang_st *&mybag);
+void chonhang(giohang_st *&mybag);
+void ingiohang(giohang_st *mybag);
+void xoasanpham(giohang_st *&mybag);
+void ghiFile(giohang_st *&mybag, char fileName[]);
+
 void taogiohang(giohang_st *&mybag){
 	printf("\nnhap ten khach hang:");fflush(stdin);gets(mybag->tenkhachhang);
 	printf("\nnhap dia chi:");fflush(stdin);gets(mybag->diachi);
@@ -81,7 +87,7 @@ int main(){
 	 	printf("_______________________MENU______________________\n"); 
 	 	printf("1.Tao gio hang\n2. Chon hang\n3. Xem chi tiet gio hang\n4. Loai bo mot mat hang\n5. Ghi toan bo noi dung gio hang vao tep cart.txt\n6. Thoat\n");
 	 	printf("_________________________________________________\n");
-		 printf("Nhap lua chon cua ban\n"); 
+		 printf("Nhap lua chon cua ban: "); 
 	 	scanf("%d", &choose);
 	 	switch (choose) {
             case 1: {
