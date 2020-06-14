@@ -2,6 +2,7 @@
 #include <conio.h>
 #include <string.h>
 #include <stdlib.h>
+#define MAX 100
 
 struct sp_st {
     char tensp[31];
@@ -21,6 +22,7 @@ void chonhang(giohang_st *&mybag);
 void ingiohang(giohang_st *mybag);
 void xoasanpham(giohang_st *&mybag);
 void ghiFile(giohang_st *&mybag, char fileName[]);
+void sapxep(giohang_st *&mybag);
 
 void taogiohang(giohang_st *&mybag){
 	printf("\nnhap ten khach hang:");fflush(stdin);gets(mybag->tenkhachhang);
@@ -40,14 +42,32 @@ void chonhang(giohang_st *&mybag){
 	}
 }
 
+void sapxep(giohang_st *&mybag){
+	sp_st temp;
+	int sosanpham;
+	char tensp1[31];
+	char tensp2[31]; 
+	 for(int i=0; i < mybag->sosanpham-1; i++){
+	 	strcpy(tensp1, (mybag->dssp[i].tensp ));
+	 	for(int j=i+1; j < mybag->sosanpham; j++){
+	 		strcpy(tensp2, (mybag->dssp[j].tensp ));
+		   if(strcmp(strupr(tensp1), strupr(tensp2))>0) {
+			 temp = (mybag->dssp[i]);
+			(mybag->dssp[i]) = (mybag->dssp[j] );
+			(mybag->dssp[j])= temp;
+			} 
+		}
+	 }
+		
+}
 
 void ingiohang(giohang_st *mybag){
-	printf("Stt\tTen san pham\tSoluong\tGia\n");
+	printf("Stt\t Ten san pham\t\t Soluong\t Gia\n");
 	 for (int i = 0; i < mybag->sosanpham; i++){
-	 	printf("%d", i+1);
-	 	printf("\t%s",  mybag->dssp[i].tensp );
-	 	printf("\t\t%d", mybag->dssp[i].soluong);
-	 	printf("\t%d", mybag->dssp[i].gia);
+	 	printf(" %d", i+1);
+	 	printf("\t %s",  mybag->dssp[i].tensp );
+	 	printf("\t\t  %d", mybag->dssp[i].soluong);
+	 	printf("\t\t %d", mybag->dssp[i].gia);
 	 	printf("\n");
 	 }
 }
@@ -73,9 +93,9 @@ void xoasanpham(giohang_st *&mybag){
 void ghiFile(giohang_st *&mybag, char fileName[]) {
 	FILE *f;
     f = fopen ("card.txt","w");
-    fprintf(f, "%5s%15s%10s%10s\n", "STT", "Ten san pham", "So luong", "Gia");
+    fprintf(f, "%5s%20s%10s%10s\n", "STT", "Ten san pham", "So luong", "Gia");
     for (int i = 0; i < mybag->sosanpham; i++){
-    	fprintf(f, "%5d%15s%10d%10d\n", i+1, mybag->dssp[i].tensp, mybag->dssp[i].soluong, mybag->dssp[i].gia);
+    	fprintf(f, "%5d%20s%10d%10d\n", i+1, mybag->dssp[i].tensp, mybag->dssp[i].soluong, mybag->dssp[i].gia);
 	}
 	fclose (f);
 }
@@ -99,6 +119,7 @@ int main(){
                 break;
             }
             case 3: {
+		sapxep(mybag);
                 ingiohang(mybag);
                 break;
             }
@@ -108,10 +129,11 @@ int main(){
             }
             case 5: {
                 ghiFile(mybag, fileName);
-                printf("\n\nGhi thong tin gio hang vao file %s thanh cong!", fileName);
+                printf("\nGhi thong tin gio hang vao file %s thanh cong!\n", fileName);
                 break;
             }
             default:
+		getch();
                 break;
         }
 	 }
