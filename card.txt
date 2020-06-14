@@ -1,4 +1,0 @@
-  STT        Ten san pham  So luong       Gia
-    1             ca chua         2      2000
-    2          kem socola         2      4000
-    3         vo hoc sinh         2      6000
